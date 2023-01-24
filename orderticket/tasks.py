@@ -159,13 +159,13 @@ def equity(connection_check):
 
 
             for live in LiveHighLow.objects.all():
-                if float(live.ltp) > float(live.high):
+                if float(liveData[live.symbol][0]) > float(live.high):
                     print(f"$$$$$$$$$$$$$$$$$$$$$$$$$$$ {live.symbol} $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
                     LiveHighLow.objects.filter(symbol=live.symbol).update(cross="call")
-                elif float(live.ltp) < float(live.low):
+                elif float(liveData[live.symbol][0]) < float(live.low):
                     print(f"$$$$$$$$$$$$$$$$$$$$$$$$$$$ {live.symbol} $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
                     LiveHighLow.objects.filter(symbol=live.symbol).update(cross="put")
-            
+
             for e in LiveOITotalAllSymbol.objects.all():
                 
 
