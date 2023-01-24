@@ -146,9 +146,29 @@ def equity(connection_check):
             print(callcrossedset)
             print(f"open crossed {callcrossedsetDict}")
 
+            # excluding section symbols
+            section_check_time = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(10,15)).time()
+            #if nowTime > section_check_time:
+            
+            # LiveHighLow.objects.all().delete()
+            if LiveHighLow.objects.all().count() == 0:
+                for key, value in liveData.items():
+                    # print(f"{key} + {value}")
+                    callcross = LiveHighLow(symbol=key,high=value[2],low=value[3],ltp=value[0],time=value[5])
+                    callcross.save()
 
+
+            for live in LiveHighLow.objects.all():
+                if float(live.ltp) > float(live.high):
+                    print(f"$$$$$$$$$$$$$$$$$$$$$$$$$$$ {live.symbol} $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+                    LiveHighLow.objects.filter(symbol=live.symbol).update(cross="call")
+                elif float(live.ltp) < float(live.low):
+                    print(f"$$$$$$$$$$$$$$$$$$$$$$$$$$$ {live.symbol} $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+                    LiveHighLow.objects.filter(symbol=live.symbol).update(cross="put")
+            
             for e in LiveOITotalAllSymbol.objects.all():
                 
+
                 try:
                     # History Check
                     historyLen = HistoryOITotal.objects.filter(symbol=e.symbol)
