@@ -245,3 +245,94 @@ class SuperLiveSegment(models.Model):
     class Meta:
 
         app_label = 'orderticket'
+        
+        
+class FirstLiveOIChange(models.Model):
+    time = models.DateTimeField(auto_now_add=False)
+    call1 = models.CharField(max_length=20,default="")
+    call2 = models.CharField(max_length=20,default="")
+    put1 = models.CharField(max_length=20,default="")
+    put2 = models.CharField(max_length=20,default="")
+    callstrike = models.CharField(max_length=20)
+    putstrike = models.CharField(max_length=20)
+    symbol = models.CharField(max_length=20)
+    expiry = models.DateField(auto_now_add=False)
+    max_ceoi_strike = models.IntegerField(default=0)
+    put_max_ceoi_strike = models.IntegerField(default=0)
+    call_percentage = models.IntegerField(default=0)
+    put_percentage = models.IntegerField(default=0)
+    call_ceoi_total =  models.IntegerField(default=0)
+    put_ceoi_total =  models.IntegerField(default=0)
+    put_final = models.IntegerField(default=0)
+    call_final = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.call1+" "+self.callstrike+" "+self.symbol
+    class Meta:
+
+        app_label = 'orderticket'
+
+
+class FirstLiveOITotal(models.Model):
+    time = models.DateTimeField(auto_now_add=False)
+    call1 = models.CharField(max_length=20,default="")
+    call2 = models.CharField(max_length=20,default="")
+    put1 = models.CharField(max_length=20,default="")
+    put2 = models.CharField(max_length=20,default="")
+    callstrike = models.CharField(max_length=20)
+    putstrike = models.CharField(max_length=20)
+    symbol = models.CharField(max_length=20)
+    expiry = models.DateField(auto_now_add=False)
+    strikegap = models.CharField(max_length=20,default="")
+
+    def __str__(self):
+        return self.call1+" "+self.callstrike+" "+self.symbol
+    class Meta:
+
+        app_label = 'orderticket'
+
+class FirstLiveOIPercentChange(models.Model):
+    time = models.DateTimeField(auto_now_add=False)
+    call1 = models.CharField(max_length=20,default="")
+    call2 = models.CharField(max_length=20,default="")
+    put1 = models.CharField(max_length=20,default="")
+    put2 = models.CharField(max_length=20,default="")
+    callstrike = models.CharField(max_length=20)
+    putstrike = models.CharField(max_length=20)
+    symbol = models.CharField(max_length=20)
+    expiry = models.DateField(auto_now_add=False)
+    strikegap = models.CharField(max_length=20,default="")
+
+    def __str__(self):
+        return self.call1+" "+self.callstrike+" "+self.symbol
+    class Meta:
+
+        app_label = 'orderticket'
+class Totalruntime(models.Model):
+    start_time = models.DateTimeField(auto_now_add=False)
+    end_time = models.DateTimeField(auto_now_add=False)
+    total_run = models.FloatField(default=0)
+    total_symbols = models.IntegerField(default=0)
+    def __str__(self):
+        return self.total_run
+    class Meta:
+
+        app_label = 'orderticket'
+
+
+class LiveHighLow(models.Model):
+    symbol = models.CharField(max_length=20)
+    time = models.TimeField(auto_now_add=False)
+    date = models.DateField(auto_now_add=True)
+    high = models.CharField(max_length=20,default="")
+    low = models.CharField(max_length=20,default="")
+    ltp = models.CharField(max_length=20)
+    cross = models.CharField(max_length=20, default='None')
+
+    def __str__(self):
+        return self.symbol
+
+    class Meta:
+
+        app_label = 'orderticket'
+        
