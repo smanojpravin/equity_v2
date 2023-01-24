@@ -147,24 +147,27 @@ def equity(connection_check):
             print(f"open crossed {callcrossedsetDict}")
 
             # excluding section symbols
-            section_check_time = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(10,15)).time()
-            #if nowTime > section_check_time:
-            
-            # LiveHighLow.objects.all().delete()
-            if LiveHighLow.objects.all().count() == 0:
-                for key, value in liveData.items():
-                    # print(f"{key} + {value}")
-                    callcross = LiveHighLow(symbol=key,high=value[2],low=value[3],ltp=value[0],time=value[5])
-                    callcross.save()
+            section_check_time = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(10,15))
+            LiveHighLow.objects.filter(date__lte=section_check_time.date()).delete()
+            if nowTime > section_check_time:
+                # LiveHighLow.objects.all().delete()
+                
+                if LiveHighLow.objects.all().count() == 0:
+                    for key, value in liveData.items():
+                        # print(f"{key} + {value}")
+                        callcross = LiveHighLow(symbol=key,high=value[2],low=value[3],ltp=value[0],time=value[5])
+                        callcross.save()
 
 
-            for live in LiveHighLow.objects.all():
-                if float(liveData[live.symbol][0]) > float(live.high):
-                    print(f"$$$$$$$$$$$$$$$$$$$$$$$$$$$ {live.symbol} $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-                    LiveHighLow.objects.filter(symbol=live.symbol).update(cross="call")
-                elif float(liveData[live.symbol][0]) < float(live.low):
-                    print(f"$$$$$$$$$$$$$$$$$$$$$$$$$$$ {live.symbol} $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-                    LiveHighLow.objects.filter(symbol=live.symbol).update(cross="put")
+                for live in LiveHighLow.objects.all():
+                    cross_check = LiveHighLow.objects.filter(symbol=live.symbol)
+                    if "None" in cross_check.cross:
+                        if float(liveData[live.symbol][0]) > float(live.high):
+                            print(f"$$$$$$$$$$$$$$$$$$$$$$$$$$$ {live.symbol} $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+                            LiveHighLow.objects.filter(symbol=live.symbol).update(cross="call", time=liveData[live.symbol][5])
+                        elif float(liveData[live.symbol][0]) < float(live.low):
+                            print(f"$$$$$$$$$$$$$$$$$$$$$$$$$$$ {live.symbol} $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+                            LiveHighLow.objects.filter(symbol=live.symbol).update(cross="put", time=liveData[live.symbol][5])
 
             for e in LiveOITotalAllSymbol.objects.all():
                 
