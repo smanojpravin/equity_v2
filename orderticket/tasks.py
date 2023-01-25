@@ -48,6 +48,7 @@ def equity(connection_check):
     'SBILIFE','SBIN','SHREECEM','SHRIRAMFIN','SUNPHARMA','SUNTV','SYNGENE','TATACHEM','TATACOMM','TATACONSUM','TATAMOTORS','TATAPOWER','TCS',
     'TECHM','TITAN','TORNTPHARM','TORNTPOWER','TRENT','TVSMOTOR','UBL','ULTRACEMCO','UPL','VEDL','VOLTAS','WHIRLPOOL','WIPRO','ZEEL','ZYDUSLIFE']
             
+            fnolist =['VEDL','VOLTAS','WHIRLPOOL','WIPRO','ZEEL','ZYDUSLIFE']
             # fnolist = ['PEL']
             print('Starting Real Time Feed.... ')
             print(f'Port > {realtime_port}')
@@ -149,7 +150,7 @@ def equity(connection_check):
             # excluding section symbols
             section_check_time = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(10,15))
             LiveHighLow.objects.filter(date__lte=section_check_time.date()).delete()
-            if nowTime > section_check_time:
+            if nowTime > section_check_time.time():
                 # LiveHighLow.objects.all().delete()
                 
                 if LiveHighLow.objects.all().count() == 0:
@@ -161,7 +162,7 @@ def equity(connection_check):
 
                 for live in LiveHighLow.objects.all():
                     cross_check = LiveHighLow.objects.filter(symbol=live.symbol)
-                    if "None" in cross_check.cross:
+                    if "None" in cross_check[0].cross:
                         if float(liveData[live.symbol][0]) > float(live.high):
                             print(f"$$$$$$$$$$$$$$$$$$$$$$$$$$$ {live.symbol} $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
                             LiveHighLow.objects.filter(symbol=live.symbol).update(cross="call", time=liveData[live.symbol][5])
