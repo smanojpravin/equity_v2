@@ -48,7 +48,6 @@ def equity(connection_check):
     'SBILIFE','SBIN','SHREECEM','SHRIRAMFIN','SUNPHARMA','SUNTV','SYNGENE','TATACHEM','TATACOMM','TATACONSUM','TATAMOTORS','TATAPOWER','TCS',
     'TECHM','TITAN','TORNTPHARM','TORNTPOWER','TRENT','TVSMOTOR','UBL','ULTRACEMCO','UPL','VEDL','VOLTAS','WHIRLPOOL','WIPRO','ZEEL','ZYDUSLIFE']
             
-            fnolist =['VEDL','VOLTAS','WHIRLPOOL','WIPRO','ZEEL','ZYDUSLIFE']
             # fnolist = ['PEL']
             print('Starting Real Time Feed.... ')
             print(f'Port > {realtime_port}')
