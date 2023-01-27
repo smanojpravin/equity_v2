@@ -155,7 +155,10 @@ def equity(connection_check):
                 if LiveHighLow.objects.all().count() == 0:
                     for key, value in liveData.items():
                         # print(f"{key} + {value}")
-                        callcross = LiveHighLow(symbol=key,high=value[2],low=value[3],ltp=value[0],time=value[5])
+                        high_value = value[2]
+                        low_value = value[3]
+                        high_low_diff = float(high_value)-float(low_value)
+                        callcross = LiveHighLow(symbol=key,high=value[2],low=value[3],ltp=value[0],time=value[5],high_low_diff=high_low_diff)
                         callcross.save()
 
 
