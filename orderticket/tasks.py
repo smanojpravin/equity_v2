@@ -148,18 +148,18 @@ def equity(connection_check):
 
             # excluding section symbols
             section_check_time = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(10,15))
-            LiveHighLow.objects.filter(date__lte=section_check_time.date()).delete()
+            #LiveHighLow.objects.filter(date__lte=section_check_time.date()).delete()
             if nowTime > section_check_time.time():
                 # LiveHighLow.objects.all().delete()
                 
-#                 if LiveHighLow.objects.all().count() == 0:
-#                     for key, value in liveData.items():
-#                         # print(f"{key} + {value}")
-#                         high_value = value[2]
-#                         low_value = value[3]
-#                         high_low_diff = float(high_value)-float(low_value)
-#                         callcross = LiveHighLow(symbol=key,high=value[2],low=value[3],ltp=value[0],time=value[5],high_low_diff=high_low_diff)
-#                         callcross.save()
+                if LiveHighLow.objects.all().count() == 0:
+                    for key, value in liveData.items():
+                        # print(f"{key} + {value}")
+                        high_value = value[2]
+                        low_value = value[3]
+                        high_low_diff = float(high_value)-float(low_value)
+                        callcross = LiveHighLow(symbol=key,high=value[2],low=value[3],ltp=value[0],time=value[5],high_low_diff=high_low_diff)
+                        callcross.save()
 
 
                 for live in LiveHighLow.objects.all():
