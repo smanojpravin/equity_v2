@@ -148,7 +148,7 @@ def equity(connection_check):
 
             # excluding section symbols
             section_check_time = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(10,15))
-            #LiveHighLow.objects.filter(date__lte=section_check_time.date()).delete()
+            LiveHighLow.objects.filter(date__lte=section_check_time.date()).delete()
             if nowTime > section_check_time.time():
                 # LiveHighLow.objects.all().delete()
                 
