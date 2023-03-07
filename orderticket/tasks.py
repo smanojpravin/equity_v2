@@ -25,9 +25,14 @@ import time as te
 
 def equity(connection_check):
 
-    startTime = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,1)).time()
+    startTime = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(8,59)).time()
     market_stop_time = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(16,1)).time()
     nowTime = datetime.now(timezone('Asia/Kolkata')).time()
+
+    if nowTime < startTime:
+        print("Market not started- deleting old data")
+        LiveEquityResult.objects.all().delete()
+
 
     if nowTime > startTime and nowTime < market_stop_time:
 
