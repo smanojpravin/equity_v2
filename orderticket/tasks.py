@@ -259,7 +259,12 @@ def equity(connection_check):
                             print(f"call Strike: {callstrike}")
                             print(f"ltp check: {liveData[e.symbol][0]}")
                             print(f"call one {callone}")
-
+                            
+                            if e.symbol in putcrossedsetDict or e.symbol in putonepercentsetDict:
+                                LiveEquityResult.objects.filter(symbol=e.symbol).update(ltp=liveData[e.symbol][0],high=liveData[e.symbol][2],low=liveData[e.symbol][3])
+                                print("already crossed")
+                                continue
+                                
                             if float(liveData[e.symbol][1]) > float(callstrike):
                             # open Check
                                 print("open checked")
@@ -435,7 +440,12 @@ def equity(connection_check):
                             
                             difference = float(diffcallstrike) - float(diffputstrike)
                             section = int(abs((float(diffcallstrike) - float(diffputstrike))/float(strikegp[0].strikegap)))
-
+                            
+                            if e.symbol in callcrossedsetDict or e.symbol in callonepercentsetDict:
+                                LiveEquityResult.objects.filter(symbol=e.symbol).update(ltp=liveData[e.symbol][0],high=liveData[e.symbol][2],low=liveData[e.symbol][3])
+                                print("already crossed")
+                                continue
+                                
                             # open check
                             if float(liveData[e.symbol][1]) < float(putstrike):
                                 print("open check")
