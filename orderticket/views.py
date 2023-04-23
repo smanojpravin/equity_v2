@@ -32,6 +32,32 @@ from django.http import HttpResponse
 from django.db.models import Count, F, Value
 from background_task import background
 
+from operator import le
+from time import sleep
+from xml.etree.ElementPath import find
+from celery import shared_task
+from .models import *
+from nsetools import *
+from datetime import datetime as dt
+from truedata_ws.websocket.TD import TD
+import websocket
+
+from celery.schedules import crontab
+from celery import Celery
+from celery.schedules import crontab
+import time
+from nsetools import Nse
+from ordermanagement.celery import app
+from django_celery_beat.models import PeriodicTask, PeriodicTasks
+from datetime import datetime, time,timedelta
+from celery.exceptions import SoftTimeLimitExceeded
+from pytz import timezone
+import pendulum
+import calendar
+from datetime import date
+import time as te
+
+
 @background(schedule=2)
 def hello_equity():
         startTime = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(0,1)).time()
