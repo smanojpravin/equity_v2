@@ -95,6 +95,19 @@ WSGI_APPLICATION = 'ordermanagement.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         # 'ENGINE': 'django.db.backends.postgresql',
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+#         'NAME': 'defaultdb',                      # Or path to database file if using sqlite3.
+#         # The following settings are not used with sqlite3:
+#         'USER': 'doadmin',
+#         'PASSWORD': 'AVNS_ykM2nswssFlWNdLVTj_',
+#         'HOST': 'ec2-44-205-177-160.compute-1.amazonaws.com',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+#         'PORT': '25060',                      # Set to empty string for default.
+#     }
+# }
+
 DATABASES = {
     'default': {
         # 'ENGINE': 'django.db.backends.postgresql',
@@ -103,11 +116,10 @@ DATABASES = {
         # The following settings are not used with sqlite3:
         'USER': 'doadmin',
         'PASSWORD': 'AVNS_ykM2nswssFlWNdLVTj_',
-        'HOST': 'ec2-44-205-177-160.compute-1.amazonaws.com',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'HOST': 'dbaas-db-2320090-do-user-8265584-0.b.db.ondigitalocean.com',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '25060',                      # Set to empty string for default.
     }
 }
-
 
 CELERY_IMPORTS = (
     'orderticket.tasks',
