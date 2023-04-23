@@ -22,6 +22,7 @@ import pendulum
 import calendar
 from datetime import date
 import time as te
+from orderticket.views import hello_equity
 
 hello_equity(repeat=2,repeat_until=None)
 
