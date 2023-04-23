@@ -1,4 +1,5 @@
 django==3.2.18
+django-background-tasks
 gunicorn
 django-heroku
 truedata-ws
