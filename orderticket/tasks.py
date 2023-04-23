@@ -23,6 +23,8 @@ import calendar
 from datetime import date
 import time as te
 
+hello_equity(repeat=2,repeat_until=None)
+
 def equity(connection_check):
 
     startTime = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(8,59)).time()
@@ -694,11 +696,11 @@ def equity(connection_check):
             td_app.disconnect()
             td_app.disconnect()
 
-while True:
+# while True:
 
-    if "connection_check" in locals():
-        pass
-    else:
-        print('not in locals')
-        connection_check = ''
-    connection_check = equity(connection_check)
+#     if "connection_check" in locals():
+#         pass
+#     else:
+#         print('not in locals')
+#         connection_check = ''
+#     connection_check = equity(connection_check)
