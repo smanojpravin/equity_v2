@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'orderticket',
     'django_celery_beat',
     'django.contrib.humanize',
+      'background_task',
 ]
 
 MIDDLEWARE = [
