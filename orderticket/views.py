@@ -30,6 +30,7 @@ from django.contrib.auth.models import User
 import csv
 from django.http import HttpResponse
 from django.db.models import Count, F, Value
+from background_task import background
 
 @background(schedule=2)
 def hello_equity():
