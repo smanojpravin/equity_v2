@@ -24,7 +24,7 @@ from datetime import date
 import time as te
 from orderticket.views import hello_equity
 
-hello_equity(repeat=2,repeat_until=None)
+#hello_equity(repeat=2,repeat_until=None)
 
 def equity(connection_check):
 
@@ -697,11 +697,11 @@ def equity(connection_check):
             td_app.disconnect()
             td_app.disconnect()
 
-# while True:
+while True:
 
-#     if "connection_check" in locals():
-#         pass
-#     else:
-#         print('not in locals')
-#         connection_check = ''
-#     connection_check = equity(connection_check)
+    if "connection_check" in locals():
+        pass
+    else:
+        print('not in locals')
+        connection_check = ''
+    connection_check = equity(connection_check)
